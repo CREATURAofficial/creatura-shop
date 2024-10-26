@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T-Shirts - CREATURA</title>
+    <style>
+        /* Full-page flexbox layout */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Creepster', cursive;
+            background: url('D:/Website/CREATURA/Images/BGSpooky.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Grid layout for the t-shirts */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+            justify-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .grid-item {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            border: 4px solid red;
+        }
+
+        .grid-item img {
+            max-width: 150px; /* Adjust image size */
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* Right side for text, quantity, and button */
+        .shirt-info {
+            text-align: left;
+            padding-left: 10px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .shirt-info h3, .shirt-info p {
+            margin: 5px 0;
+        }
+
+        /* Plus/Minus Quantity selector */
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .quantity-selector button {
+            background-color: orange;
+            color: black;
+            font-weight: bold;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .quantity-display {
+            margin: 0 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Pre-order button */
+        .pre-order-button {
+            margin-top: 10px;
+            background-color: orange;
+            padding: 10px 20px;
+            font-family: 'Creepster', cursive;
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .pre-order-button:hover {
+            transform: scale(1.1); /* Button pop out on hover */
+        }
+
+        .back-button, .clear-basket-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: orange;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            display: block;
+            width: 150px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Basket container */
+        .basket-container {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .basket-item {
+            margin-bottom: 10px;
+        }
+
+        /* Spooky-style header */
+        h1.spooky-header {
+            text-align: center;
+            font-family: 'Creepster', cursive;
+            font-size: 3rem;
+            color: red;
+            text-shadow: 2px 2px 4px black;
+            margin-bottom: 30px;
+        }
+
+        /* Scroll smoothly */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+    </style>
+</head>
+<body>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Spooky "T-SHIRTS" header -->
+        <h1 class="spooky-header">T-SHIRTS</h1>
+
+        <!-- Back to Home Button -->
+        <button class="back-button" onclick="window.location.href='index.html'">Back to Home</button>
+
+        <!-- Grid for T-Shirts -->
+        <div class="grid-container">
+            <!-- Halloween Design -->
+            <div class="grid-item">
+                <img src="D:/Website/CREATURA/Images/Halloween-design.jpg" alt="Halloween Design">
+                <div class="shirt-info">
+                    <h3>Halloween Design</h3>
+                    <p>Price: £29.99</p>
+                    <div class="quantity-selector">
+                        <button class="decrease">-</button>
+                        <span class="quantity-display" id="halloween-quantity">1</span>
+                        <button class="increase">+</button>
+                    </div>
+                    <button class="pre-order-button" data-figure="Halloween Design" data-price="29.99">Pre-order</button>
+                </div>
+            </div>
+
+            <!-- Hydra Shirt -->
+            <div class="grid-item">
+                <img src="D:/Website/CREATURA/Images/HydraShirt.jpg" alt="Hydra Shirt">
+                <div class="shirt-info">
+                    <h3>Hydra Shirt</h3>
+                    <p>Price: £45</p>
+                    <div class="quantity-selector">
+                        <button class="decrease">-</button>
+                        <span class="quantity-display" id="hydra-quantity">1</span>
+                        <button class="increase">+</button>
+                    </div>
+                    <button class="pre-order-button" data-figure="Hydra Shirt" data-price="45">Pre-order</button>
+                </div>
+            </div>
+
+            <!-- Werewolf Shirt -->
+            <div class="grid-item">
+                <img src="D:/Website/CREATURA/Images/Werewolf-Shirt.jpg" alt="Werewolf Shirt">
+                <div class="shirt-info">
+                    <h3>Werewolf Shirt</h3>
+                    <p>Price: £25</p>
+                    <div class="quantity-selector">
+                        <button class="decrease">-</button>
+                        <span class="quantity-display" id="werewolf-quantity">1</span>
+                        <button class="increase">+</button>
+                    </div>
+                    <button class="pre-order-button" data-figure="Werewolf Shirt" data-price="25">Pre-order</button>
+                </div>
+            </div>
+
+            <!-- The Demonic Vampire -->
+            <div class="grid-item">
+                <img src="D:/Website/CREATURA/Images/TheDemonicVampire.jpg" alt="The Demonic Vampire">
+                <div class="shirt-info">
+                    <h3>The Demonic Vampire</h3>
+                    <p>Price: £16.99</p>
+                    <div class="quantity-selector">
+                        <button class="decrease">-</button>
+                        <span class="quantity-display" id="vampire-quantity">1</span>
+                        <button class="increase">+</button>
+                    </div>
+                    <button class="pre-order-button" data-figure="The Demonic Vampire" data-price="16.99">Pre-order</button>
+                </div>
+            </div>
+
+            <!-- Yokai Creatura Design -->
+            <div class="grid-item">
+                <img src="D:/Website/CREATURA/Images/Yokai Creatura.jpg" alt="Yokai Creatura">
+                <div class="shirt-info">
+                    <h3>Yokai Creatura</h3>
+                    <p>Price: £35</p>
+                    <div class="quantity-selector">
+                        <button class="decrease">-</button>
+                        <span class="quantity-display" id="yokai-quantity">1</span>
+                        <button class="increase">+</button>
+                    </div>
+                    <button class="pre-order-button" data-figure="Yokai Creatura" data-price="35">Pre-order</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Basket Section -->
+        <div class="basket-container basket-section" id="basket-container">
+            <h2>Basket</h2>
+            <div id="basket-items"></div>
+            <p>Total: £<span id="total-price">0</span></p>
+
+            <!-- Clear Basket Button -->
+            <button class="clear-basket-button" id="clear-basket">Clear Basket</button>
+
+            <!-- Checkout Button -->
+            <button class="pre-order-button" onclick="window.location.href='pre-order checkout.html'">Checkout</button>
+        </div>
+    </div>
+
+    <!-- JavaScript for Basket Functionality -->
+    <script>
+        let basket = [];
+        let totalPrice = 0;
+
+        // Update basket UI function
+        function updateBasket() {
+            const basketContainer = document.getElementById("basket-items");
+            basketContainer.innerHTML = ''; // Clear basket
+
+            basket.forEach(item => {
+                basketContainer.innerHTML += `
+                    <div class="basket-item">
+                        ${item.figure}: ${item.quantity} x £${item.price} = £${(item.quantity * item.price).toFixed(2)}
+                    </div>
+                `;
+            });
+
+            // Update total price
+            document.getElementById("total-price").textContent = totalPrice.toFixed(2);
+
+            // Save basket data to localStorage
+            localStorage.setItem('basket', JSON.stringify(basket));
+            localStorage.setItem('totalPrice', totalPrice.toFixed(2));
+        }
+
+        // Add to basket button logic
+        const preOrderButtons = document.querySelectorAll(".pre-order-button");
+        preOrderButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const figure = this.getAttribute("data-figure");
+                const price = parseFloat(this.getAttribute("data-price"));
+                const quantityDisplay = this.parentElement.querySelector('.quantity-display').textContent;
+                const quantity = parseInt(quantityDisplay);
+
+                const existingItem = basket.find(item => item.figure === figure);
+                if (existingItem) {
+                    existingItem.quantity = quantity;
+                } else {
+                    basket.push({ figure, price, quantity });
+                }
+
+                // Update total price
+                totalPrice = basket.reduce((total, item) => total + (item.price * item.quantity), 0);
+
+                // Update the basket UI
+                updateBasket();
+            });
+        });
+
+        // Clear Basket button logic
+        const clearBasketButton = document.getElementById("clear-basket");
+        clearBasketButton.addEventListener("click", function () {
+            basket = [];
+            totalPrice = 0;
+
+            updateBasket();
+
+            localStorage.removeItem('basket');
+            localStorage.removeItem('totalPrice');
+        });
+
+        // Quantity increase and decrease logic
+        document.querySelectorAll('.increase').forEach(button => {
+            button.addEventListener('click', function () {
+                const quantityDisplay = this.previousElementSibling;
+                let quantity = parseInt(quantityDisplay.textContent);
+                if (quantity < 5) {
+                    quantity += 1;
+                    quantityDisplay.textContent = quantity;
+                }
+            });
+        });
+
+        document.querySelectorAll('.decrease').forEach(button => {
+            button.addEventListener('click', function () {
+                const quantityDisplay = this.nextElementSibling;
+                let quantity = parseInt(quantityDisplay.textContent);
+                if (quantity > 1) {
+                    quantity -= 1;
+                    quantityDisplay.textContent = quantity;
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

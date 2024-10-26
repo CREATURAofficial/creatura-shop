@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CREATURA</title>
+    <style>
+        /* Full-page flexbox layout */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Creepster', cursive;
+            background: url('D:/Website/CREATURA/Images/BGSpooky.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden; /* Disable horizontal scrollbar */
+        }
+
+        /* Button to trigger dropdown */
+        .menu-button {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 2;
+        }
+
+        /* Black bar behind the logos */
+        .logo-bar {
+            width: 100%;
+            height: 100px;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Moon and Cross Logo Styling (left-aligned) */
+        .moon-cross-logo {
+            position: absolute;
+            left: 20px;  /* Align to the left with 20px margin */
+            max-width: 80px; /* Adjust size as needed */
+            height: auto;
+            z-index: 1;
+        }
+
+        /* CREATURA Title Image (centered) */
+        .title-image {
+            max-width: 300px; /* Adjust the size of the logo */
+            height: auto;
+            z-index: 1; /* Ensure it stays above the black bar */
+        }
+
+        /* Dropdown menu */
+        .dropdown {
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background-color: black;
+            width: 200px;
+            max-height: 0;
+            overflow: hidden; /* Ensure hidden when collapsed */
+            flex-direction: column;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: max-height 0.5s ease-out; /* Smooth drop down effect */
+            z-index: 1;
+        }
+
+        /* When the menu is open */
+        .dropdown.open {
+            max-height: 200px; /* Adjust based on content */
+        }
+
+        /* Dropdown links */
+        .dropdown a {
+            padding: 14px 20px;
+            text-decoration: none;
+            color: white;
+            text-align: left;
+            display: block;
+        }
+
+        .dropdown a:hover {
+            background-color: rgba(255, 165, 0, 0.7); /* Hover effect */
+        }
+
+        /* Disabled link styling for "Coming Soon" */
+        .coming-soon {
+            color: grey;
+            pointer-events: none;
+            cursor: default; /* Show disabled cursor */
+        }
+
+        /* Main content area */
+        .content {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Centered carousel container */
+        .carousel-container {
+            width: 600px;
+            height: 450px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Slide images */
+        .slides {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure images fit within the container */
+            object-position: center; /* Default center positioning for all slides */
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out; /* Smooth fade transition */
+        }
+
+        /* Adjust specific image (Werewolf Figure) to move down */
+        .werewolf-figure {
+            object-position: center 40%; /* Move the visible area down to show more of the base */
+        }
+
+        /* Show the current active slide */
+        .active {
+            opacity: 1;
+        }
+
+        /* Footer styling */
+        .footer {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            text-align: center;
+            color: white;
+            width: 100%;
+        }
+
+        /* About Me section styling */
+        .about-me {
+            background-color: rgba(255, 165, 0, 0.1); /* Slightly transparent orange */
+            padding: 40px 20px;
+            color: #fff;
+        }
+
+        .about-me h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #ff6f00;
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        .about-me p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-me img {
+            max-width: 300px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 10px;
+            border: 2px solid #ff6f00;
+        }
+
+        /* Scroll smoothly to About Me */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap'); /* Import spooky font */
+    </style>
+</head>
+<body>
+
+    <!-- Logo Bar with Black Background -->
+    <div class="logo-bar">
+        <!-- Moon and Cross Logo (Left Corner) -->
+        <img src="D:/Website/CREATURA/Website Logo/Logo Moon and Cross.png" alt="Moon and Cross Logo" class="moon-cross-logo">
+        <!-- Custom Title Image (Centered) -->
+        <img src="D:/Website/CREATURA/Images/TITLE Website Name.png" alt="CREATURA Title" class="title-image">
+    </div>
+
+    <!-- Menu Button -->
+    <button class="menu-button" onclick="toggleMenu()">Menu</button>
+
+    <!-- Dropdown Menu -->
+    <div id="dropdown" class="dropdown">
+        <a href="index.html">Home</a>
+        <a href="tshirts.html">T-shirts</a>
+        <a class="coming-soon">Figures (Coming Soon)</a> <!-- Disabled Figures Link -->
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Centered Carousel Container -->
+        <div class="carousel-container">
+            <img src="D:/Website/CREATURA/slide show images/Halloween-design.jpg" class="slides active">
+            <img src="D:/Website/CREATURA/slide show images/HydraShirt.jpg" class="slides">
+            <img src="D:/Website/CREATURA/slide show images/PumpkinFigure.JPG" class="slides">
+            <img src="D:/Website/CREATURA/slide show images/TheDemonicVampire.jpg" class="slides">
+            <img src="D:/Website/CREATURA/slide show images/WereWolf Figure.JPG" class="slides werewolf-figure"> <!-- Adjusted Werewolf Figure to show more base -->
+            <img src="D:/Website/CREATURA/slide show images/Werewolf-Shirt.jpg" class="slides">
+        </div>
+    </div>
+
+    <!-- About Me Section -->
+    <div id="about-me" class="about-me">
+        <h2>About Me</h2>
+        <p>
+            Welcome to CREATURA! I'm passionate about creating unique 3D printed figures and custom T-shirts. Each project is crafted with care, from concept to creation. 
+            My work blends creativity with cutting-edge technology to bring the fantastical to life. Check out some of my behind-the-scenes work below.
+        </p>
+
+        <!-- Behind the scenes images -->
+        <img src="behind-scenes1.jpg" alt="Behind the scenes 1">
+        <img src="behind-scenes2.jpg" alt="Behind the scenes 2">
+        <img src="behind-scenes3.jpg" alt="Behind the scenes 3">
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 CREATURA</p>
+    </div>
+
+    <!-- JavaScript to toggle dropdown menu and handle carousel -->
+    <script>
+        function toggleMenu() {
+            var dropdown = document.getElementById('dropdown');
+            dropdown.classList.toggle('open');  // Toggle the "open" class for smooth transition
+        }
+
+        // Carousel logic to loop through slides
+        let slideIndex = 0;
+        let slides = document.getElementsByClassName("slides");
+        showSlides();
+
+        function showSlides() {
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active");
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+            slides[slideIndex - 1].classList.add("active");
+            setTimeout(showSlides, 4000); // Change image every 4 seconds
+        }
+    </script>
+
+</body>
+</html>

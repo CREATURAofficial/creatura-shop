@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-order Checkout</title>
+    <style>
+        /* Full-page layout and styles */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Creepster', cursive;
+            background: url('D:/Website/CREATURA/Images/BGSpooky.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: red;
+        }
+
+        .order-summary {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .order-summary p {
+            font-size: 1.2rem;
+        }
+
+        .total-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .payment-details {
+            text-align: left;
+        }
+
+        .payment-details label {
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 1.2rem;
+        }
+
+        .payment-details input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+        }
+
+        .checkout-button {
+            background-color: orange;
+            color: black;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .checkout-button:hover {
+            transform: scale(1.05);
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+    </style>
+</head>
+<body>
+
+<div class="content">
+    <h1>Pre-order Checkout</h1>
+
+    <div class="order-summary" id="order-summary">
+        <!-- Dynamically populated order summary will go here -->
+    </div>
+
+    <div class="total-price" id="total-price">
+        Total: £0.00
+    </div>
+
+    <div class="payment-details">
+        <h2>Payment Details</h2>
+        <label for="card-number">Card Number</label>
+        <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
+        
+        <label for="expiry-date">Expiry Date</label>
+        <input type="text" id="expiry-date" placeholder="MM/YY">
+        
+        <label for="cvv">CVV</label>
+        <input type="text" id="cvv" placeholder="123">
+        
+        <label for="card-name">Name on Card</label>
+        <input type="text" id="card-name" placeholder="John Doe">
+        
+        <button class="checkout-button" id="checkout-btn">Confirm Payment</button>
+    </div>
+</div>
+
+<script>
+    let basket = JSON.parse(localStorage.getItem('basket')) || [];
+    let totalPrice = 0;
+
+    // Function to update the order summary and total
+    function updateOrderSummary() {
+        const orderSummary = document.getElementById("order-summary");
+        orderSummary.innerHTML = ''; // Clear order summary
+
+        basket.forEach(item => {
+            orderSummary.innerHTML += `
+                <p>${item.figure}: ${item.quantity} x £${item.price} = £${(item.quantity * item.price).toFixed(2)}</p>
+            `;
+        });
+
+        // Update total
+        totalPrice = basket.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        document.getElementById("total-price").textContent = `Total: £${totalPrice.toFixed(2)}`;
+    }
+
+    // Call the function to update the summary
+    updateOrderSummary();
+
+    // Validate payment details when the user clicks "Confirm Payment"
+    document.getElementById("checkout-btn").addEventListener("click", function () {
+        const cardNumber = document.getElementById("card-number").value.trim();
+        const expiryDate = document.getElementById("expiry-date").value.trim();
+        const cvv = document.getElementById("cvv").value.trim();
+        const cardName = document.getElementById("card-name").value.trim();
+
+        // Check if any payment detail is missing
+        if (!cardNumber || !expiryDate || !cvv || !cardName) {
+            alert("Please enter all card details before proceeding!");
+        } else {
+            // If all fields are filled, proceed to payment (this part can be replaced with actual payment logic)
+            alert("Payment Confirmed!");
+        }
+    });
+</script>
+
+</body>
+</html>
