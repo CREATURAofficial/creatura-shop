@@ -1,0 +1,60 @@
+<script>
+    function displayBasket() {
+        const basketItems = JSON.parse(localStorage.getItem("basketItems")) || {};
+        const basketContainer = document.getElementById("basket-items");
+
+        basketContainer.innerHTML = ""; // Clear the container
+
+        // Check if there are no items in the basket
+        if (Object.keys(basketItems).length === 0) {
+            basketContainer.innerHTML = "<p class='empty-basket'>Your basket is empty.</p>";
+            console.log("Basket is empty");
+            return;
+        }
+
+        // Otherwise, display items
+        Object.entries(basketItems).forEach(([itemName, item]) => {
+            const itemElement = document.createElement("div");
+            itemElement.classList.add("basket-item");
+
+            itemElement.innerHTML = `
+                <div class="item-box"></div>
+                <div class="item-details">
+                    <p><strong>${itemName}</strong></p>
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity('${itemName}', -1)">–</button>
+                        <p>${item.quantity}</p>
+                        <button onclick="changeQuantity('${itemName}', 1)">+</button>
+                        <button class="delete-btn" onclick="removeItem('${itemName}')">X</button>
+                    </div>
+                </div>
+            `;
+            basketContainer.appendChild(itemElement);
+        });
+    }
+
+    function removeItem(itemName) {
+        let basketItems = JSON.parse(localStorage.getItem("basketItems")) || {};
+        delete basketItems[itemName]; // Remove item from basket
+        localStorage.setItem("basketItems", JSON.stringify(basketItems)); // Update localStorage
+        displayBasket(); // Refresh the display
+    }
+
+    function changeQuantity(itemName, change) {
+        let basketItems = JSON.parse(localStorage.getItem("basketItems")) || {};
+        if (basketItems[itemName]) {
+            basketItems[itemName].quantity += change;
+
+            // If quantity goes below 1, remove the item
+            if (basketItems[itemName].quantity < 1) {
+                delete basketItems[itemName];
+            }
+
+            localStorage.setItem("basketItems", JSON.stringify(basketItems)); // Update localStorage
+            displayBasket(); // Refresh the display
+        }
+    }
+
+    // Call the function to display basket items
+    displayBasket();
+</script>
