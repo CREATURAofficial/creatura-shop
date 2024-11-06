@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Shadows of the Endless Night</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(0, 0, 0);
+            color: #333;
+            text-align: center;
+        }
+
+        /* Navigation bar styling */
+        .navbar {
+            background-color: #171a21;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+            padding: 10px;
+            margin: 0 15px;
+        }
+
+        .navbar a:hover {
+            color: purple;
+        }
+
+        /* Main content */
+        .content {
+            margin-top: 70px;
+            padding: 20px;
+        }
+
+        /* Game page layout with image above the heading */
+        .game-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .game-info img {
+            border-radius: 10px;
+            width: 600px;
+            height: 350px;
+            margin-bottom: 20px;
+        }
+
+        .game-details h1 {
+            color: #171a21;
+            font-size: 36px;
+            margin: 0;
+        }
+
+        .game-details p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 20px 0;
+            max-width: 800px;
+        }
+
+        .button-section {
+            margin-top: 20px;
+        }
+
+        .wishlist-button {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 18px;
+            color: white;
+            background-color: purple;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .wishlist-button:hover {
+            background-color: #4b0082;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #171a21;
+            color: white;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation bar -->
+    <div class="navbar">
+        <a href="index">Home</a>
+        <a href="about">About</a>
+        <a href="#">Wishlist</a>
+    </div>
+    
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="game-info">
+            <!-- Game Screenshot -->
+            <img src="Images/game2.jpg" alt="Shadows of the Endless Night Screenshot">
+
+            <!-- Game Description -->
+            <div class="game-details">
+                <h1>Shadows of the Endless Night</h1>
+                <p>Shadows of the Endless Night is a terrifying survival horror game where you find yourself in a mysterious forest filled with unimaginable horrors. Collect orbs to power your escape, but the deeper you venture, the more dangerous it becomes.</p>
+                <p>Survive the haunted woods and uncover the dark secrets behind the endless night.</p>
+
+                <div class="button-section">
+                    <a href="https://store.steampowered.com/app/yourgame" target="_blank" class="wishlist-button">Add to Wishlist</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 Shadows of the Endless Night. All rights reserved.</p>
+    </div>
+
+</body>
+</html>

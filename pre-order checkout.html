@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-Order Checkout - CREATURA</title>
+    <style>
+        /* Full-page flexbox layout */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Creepster', cursive;
+            background: url('Images/Background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Centered container for checkout items */
+        .checkout-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .checkout-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #444;
+        }
+
+        .checkout-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Total price styling */
+        .total-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* Confirm Pre-Order button styling */
+        .confirm-button {
+            margin-top: 20px;
+            background-color: orange;
+            padding: 10px 20px;
+            font-family: 'Creepster', cursive;
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .confirm-button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Back to Home button styling (bottom-right corner) */
+        .back-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: orange;
+            color: black;
+            padding: 10px 20px;
+            font-family: 'Creepster', cursive;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .back-button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Payment overlay styling */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .overlay-content {
+            background-color: white;
+            color: black;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .card-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .card-option {
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Highlight selected card option */
+        .card-option.selected {
+            background-color: red;
+            color: white;
+        }
+
+        .input-group {
+            margin: 10px 0;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #333;
+            border-radius: 5px;
+        }
+
+        .close-button {
+            background-color: orange;
+            padding: 10px 20px;
+            font-family: 'Creepster', cursive;
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            margin-top: 15px;
+        }
+
+        /* Scroll smoothly */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+    </style>
+</head>
+<body>
+
+    <!-- Checkout Container -->
+    <div class="checkout-container">
+        <h1>Checkout</h1>
+        
+        <!-- Display items to be purchased -->
+        <div id="checkout-items">
+            <!-- Example item structure; populate dynamically -->
+            <div class="checkout-item">
+                <span>Item Name - Quantity</span>
+                <span>£Price</span>
+            </div>
+        </div>
+
+        <!-- Total Price -->
+        <p class="total-price">Total: £<span id="total-price">0.00</span></p>
+
+        <!-- Confirm Pre-Order Button -->
+        <button class="confirm-button" onclick="showPaymentOverlay()">Confirm Pre-Order</button>
+    </div>
+
+    <!-- Back to Home Button (Bottom Right Corner) -->
+    <button class="back-button" onclick="window.location.href='index.html'">Back to Home</button>
+
+    <!-- Payment Overlay -->
+    <div class="overlay" id="payment-overlay">
+        <div class="overlay-content">
+            <h2>Enter Payment Details</h2>
+            <p>Select Card Type:</p>
+            <div class="card-options">
+                <div class="card-option" onclick="selectCard(this)">Debit Card</div>
+                <div class="card-option" onclick="selectCard(this)">Credit Card</div>
+                <div class="card-option" onclick="selectCard(this)">MasterCard</div>
+                <div class="card-option" onclick="selectCard(this)">Visa</div>
+            </div>
+            
+            <!-- Card Details Form -->
+            <div class="input-group">
+                <label for="card-number">Card Number</label>
+                <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
+            </div>
+            <div class="input-group">
+                <label for="expiry-date">Expiry Date</label>
+                <input type="text" id="expiry-date" placeholder="MM/YY">
+            </div>
+            <div class="input-group">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" placeholder="123">
+            </div>
+
+            <!-- Confirm and Close Buttons -->
+            <button class="close-button" onclick="confirmOrder()">Confirm Payment</button>
+            <button class="close-button" onclick="closePaymentOverlay()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- JavaScript for Basket and Overlay Functionality -->
+    <script>
+        let basket = JSON.parse(localStorage.getItem('basket')) || [];
+        let totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0;
+        let selectedCardType = null;
+
+        // Populate checkout items
+        function populateCheckout() {
+            const checkoutItemsContainer = document.getElementById('checkout-items');
+            checkoutItemsContainer.innerHTML = '';
+
+            basket.forEach(item => {
+                checkoutItemsContainer.innerHTML += `
+                    <div class="checkout-item">
+                        <span>${item.figure} - Quantity: ${item.quantity}</span>
+                        <span>£${(item.quantity * item.price).toFixed(2)}</span>
+                    </div>
+                `;
+            });
+
+            document.getElementById('total-price').textContent = totalPrice.toFixed(2);
+        }
+
+        // Show payment overlay
+        function showPaymentOverlay() {
+            document.getElementById('payment-overlay').style.display = 'flex';
+        }
+
+        // Close payment overlay
+        function closePaymentOverlay() {
+            document.getElementById('payment-overlay').style.display = 'none';
+        }
+
+        // Select card type
+        function selectCard(cardElement) {
+            // Remove 'selected' class from all options
+            document.querySelectorAll('.card-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            // Add 'selected' class to the clicked option
+            cardElement.classList.add('selected');
+            selectedCardType = cardElement.textContent;
+        }
+
+        // Confirm order function
+        function confirmOrder() {
+            const cardNumber = document.getElementById('card-number').value;
+            const expiryDate = document.getElementById('expiry-date').value;
+            const cvv = document.getElementById('cvv').value;
+
+            if (!selectedCardType || !cardNumber || !expiryDate || !cvv) {
+                alert('Please enter all card information.');
+            } else {
+                alert('Payment confirmed! Thank you for your pre-order.');
+                localStorage.removeItem('basket');
+                localStorage.removeItem('totalPrice');
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Initialize checkout page
+        populateCheckout();
+    </script>
+
+</body>
+</html>

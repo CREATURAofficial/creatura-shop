@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figures - CREATURA</title>
+    <style>
+        /* Full-page flexbox layout */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Creepster', cursive;
+            background: url('D:/Website/CREATURA/Images/Background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Grid layout for the figures with a single column for larger images */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr; /* Single column for vertical alignment */
+            gap: 30px;
+            padding: 20px;
+            max-width: 800px; /* Adjusted for larger images */
+            margin: 0 auto;
+        }
+
+        .grid-item {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column; /* Arrange content vertically */
+            align-items: center;
+            border: 4px solid red;
+        }
+
+        /* Adjusted image size for better visibility */
+        .grid-item img {
+            max-width: 250px; /* Larger image */
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* Info and button styling */
+        .figure-info {
+            text-align: center;
+            padding-top: 10px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .figure-info h3, .figure-info p {
+            margin: 5px 0;
+        }
+
+        /* Quantity selector */
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .quantity-selector button {
+            background-color: orange;
+            color: black;
+            font-weight: bold;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .quantity-display {
+            margin: 0 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Styling the pre-order button */
+        .checkout-button {
+            margin-top: 10px;
+            background-color: orange;
+            padding: 10px 20px;
+            font-family: 'Creepster', cursive;
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .checkout-button:hover {
+            transform: scale(1.1); /* Button pop out on hover */
+        }
+
+        /* Center the back button */
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: orange;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            display: block;
+            width: 150px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Basket container */
+        .basket-container {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .basket-item {
+            margin-bottom: 10px;
+        }
+
+        /* Spooky-style header */
+        h1.spooky-header {
+            text-align: center;
+            font-family: 'Creepster', cursive;
+            font-size: 3rem;
+            color: red;
+            text-shadow: 2px 2px 4px black;
+            margin-bottom: 30px;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+    </style>
+</head>
+<body>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Spooky "FIGURES" header -->
+        <h1 class="spooky-header">FIGURES</h1>
+
+        <!-- Back to Home Button -->
+        <button class="back-button" onclick="window.location.href='index.html'">Back to Home</button>
+
+        <!-- Grid for Figures -->
+        <div class="grid-container">
+            <!-- Werewolf Figure -->
+            <div class="grid-item">
+                <img src="D:/Website/CREATURA/slide show images/WereWolf Figure.JPG" alt="Werewolf Figure">
+                <div class="figure-info">
+                    <h3>Werewolf Figure</h3>
+                    <p>Price: £200</p>
+                    <div class="quantity-selector">
+                        <button class="decrease">-</button>
+                        <span class="quantity-display" id="werewolf-quantity">1</span>
+                        <button class="increase">+</button>
+                    </div>
+                    <button class="checkout-button" data-figure="Werewolf Figure" data-price="200">Pre-order</button>
+                </div>
+            </div>
+
+            <!-- Pumpkin Figure -->
+            <div class="grid-item">
+                <img src="D:/Website/CREATURA/slide show images/PumpkinFigure.JPG" alt="Pumpkin Figure">
+                <div class="figure-info">
+                    <h3>Pumpkin Figure</h3>
+                    <p>Price: £145</p>
+                    <div class="quantity-selector">
+                        <button class="decrease">-</button>
+                        <span class="quantity-display" id="pumpkin-quantity">1</span>
+                        <button class="increase">+</button>
+                    </div>
+                    <button class="checkout-button" data-figure="Pumpkin Figure" data-price="145">Pre-order</button>
+                </div>
+            </div>
+
+            <!-- Additional figures can be added in the same structure -->
+        </div>
+
+        <!-- Basket Section -->
+        <div class="basket-container basket-section" id="basket-container">
+            <h2>Basket</h2>
+            <div id="basket-items"></div>
+            <p>Total: £<span id="total-price">0</span></p>
+            <button class="checkout-button" onclick="window.location.href='pre-order checkout.html'">Checkout</button>
+        </div>
+    </div>
+
+    <!-- JavaScript for Basket Functionality -->
+    <script>
+        let basket = [];
+        let totalPrice = 0;
+
+        function updateBasket() {
+            const basketContainer = document.getElementById("basket-items");
+            basketContainer.innerHTML = ''; // Clear basket
+
+            basket.forEach(item => {
+                basketContainer.innerHTML += `
+                    <div class="basket-item">
+                        ${item.figure}: ${item.quantity} x £${item.price} = £${item.quantity * item.price}
+                    </div>
+                `;
+            });
+
+            document.getElementById("total-price").textContent = totalPrice.toFixed(2);
+            localStorage.setItem('basket', JSON.stringify(basket));
+            localStorage.setItem('totalPrice', totalPrice.toFixed(2));
+        }
+
+        document.querySelectorAll(".checkout-button").forEach(button => {
+            button.addEventListener("click", function () {
+                const figure = this.getAttribute("data-figure");
+                const price = parseFloat(this.getAttribute("data-price"));
+                const quantity = parseInt(this.parentElement.querySelector('.quantity-display').textContent);
+
+                const existingItem = basket.find(item => item.figure === figure);
+                if (existingItem) {
+                    existingItem.quantity = quantity;
+                } else {
+                    basket.push({ figure, price, quantity });
+                }
+
+                totalPrice = basket.reduce((total, item) => total + (item.price * item.quantity), 0);
+                updateBasket();
+            });
+        });
+
+        document.querySelectorAll('.increase').forEach(button => {
+            button.addEventListener('click', function () {
+                const quantityDisplay = this.previousElementSibling;
+                let quantity = parseInt(quantityDisplay.textContent);
+                if (quantity < 5) {
+                    quantity += 1;
+                    quantityDisplay.textContent = quantity;
+                }
+            });
+        });
+
+        document.querySelectorAll('.decrease').forEach(button => {
+            button.addEventListener('click', function () {
+                const quantityDisplay = this.nextElementSibling;
+                let quantity = parseInt(quantityDisplay.textContent);
+                if (quantity > 1) {
+                    quantity -= 1;
+                    quantityDisplay.textContent = quantity;
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

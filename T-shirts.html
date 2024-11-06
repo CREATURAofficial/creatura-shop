@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T-shirts - CREATURA</title>
+    <style>
+        /* Full-page flexbox layout */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Creepster', cursive;
+            background: url('Images/Background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Grid layout for the t-shirts */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+            justify-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .grid-item {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            border: 4px solid red;
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 350px;
+            width: 600px;
+        }
+
+        /* Left media section for normal grids */
+        .media {
+            flex: 1;
+            max-width: 40%;
+            margin-right: 20px;
+            position: relative;
+        }
+
+        .media img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: opacity 0.5s ease;
+            object-fit: cover;
+        }
+
+        /* Specific styling for the Yokai Creatura grid */
+        .yokai-media {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .yokai-media video {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .yokai-media img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            transition: opacity 0.5s ease;
+            object-fit: cover;
+        }
+
+        /* Hover effect for Yokai Creatura video */
+        .grid-item.yokai:hover .yokai-media video {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .grid-item.yokai:hover .yokai-media img {
+            opacity: 0;
+        }
+
+        /* Right side for text, quantity, button, and size chart */
+        .shirt-info {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding-left: 20px;
+            color: white;
+        }
+
+        .shirt-info h3 {
+            font-size: 24px;
+            text-align: left;
+            width: 100%;
+            margin: 0;
+        }
+
+        .description {
+            margin: 10px 0;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        /* Quantity selector */
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .quantity-selector button {
+            background-color: orange;
+            color: black;
+            font-weight: bold;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .quantity-display {
+            margin: 0 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Pre-order button */
+        .pre-order-button {
+            margin-top: 10px;
+            background-color: orange;
+            padding: 10px 20px;
+            font-family: 'Creepster', cursive;
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .pre-order-button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Size chart */
+        .size-chart {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .size-box {
+            background-color: #ff6f00;
+            color: black;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .back-button, .clear-basket-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: orange;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            display: block;
+            width: 150px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Basket container */
+        .basket-container {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .basket-item {
+            margin-bottom: 10px;
+        }
+
+        /* Header Image */
+        .header-image {
+            display: block;
+            margin: 20px auto;
+            width: 300px;
+            height: auto;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+    </style>
+</head>
+<body>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Replace T-SHIRTS text with T-shirts_ image -->
+        <img src="Images/T-shirts_.png" alt="T-SHIRTS" class="header-image">
+
+        <!-- Back to Home Button -->
+        <button class="back-button" onclick="window.location.href='index.html'">Back to Home</button>
+
+        <!-- Grid for T-Shirts -->
+        <div class="grid-container">
+            <!-- Example Grid Items with Different Designs -->
+            <!-- Halloween Design -->
+            <div class="grid-item">
+                <div class="media">
+                    <img src="Images/Halloween-design.jpg" alt="Halloween Design">
+                </div>
+                <div class="shirt-info">
+                    <h3>Halloween Design</h3>
+                    <p class="description">Celebrate the spooky season with our exclusive Halloween design, perfect for any horror enthusiast.</p>
+                    <p>Price: £29.99</p>
+                    <div class="quantity-selector">
+                        <button class="decrease">-</button>
+                        <span class="quantity-display" id="halloween-quantity">1</span>
+                        <button class="increase">+</button>
+                    </div>
+                    <button class="pre-order-button" data-figure="Halloween Design" data-price="29.99">Pre-order</button>
+                    <div class="size-chart">
+                        <div class="size-box">S</div>
+                        <div class="size-box">M</div>
+                        <div class="size-box">L</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hydra Shirt -->
+            <div class="grid-item">
+                <div class="media">
+                    <img src="Images/HydraShirt.jpg" alt="Hydra Shirt">
+                </div>
+                <div class="shirt-info">
+                    <h3>Hydra Shirt</h3>
+                    <p class="description">Show off your mythical side with this Hydra design, embodying strength and resilience.</p>
+                    <p>Price: £45</p>
+                    <div class="quantity-selector">
+                        <button class="decrease">-</button>
+                        <span class="quantity-display" id="hydra-quantity">1</span>
+                        <button class="increase">+</button>
+                    </div>
+                    <button class="pre-order-button" data-figure="Hydra Shirt" data-price="45">Pre-order</button>
+                    <div class="size-chart">
+                        <div class="size-box">S</div>
+                        <div class="size-box">M</div>
+                        <div class="size-box">L</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Werewolf Shirt -->
+            <div class="grid-item">
+                <div class="media">
+                    <img src="Images/Werewolf-Shirt.jpg" alt="Werewolf Shirt">
+                </div>
+                <div class="shirt-info">
+                    <h3>Werewolf Shirt</h3>
+                    <p class="description">Channel your wild side with our fierce Werewolf shirt, a must-have for creature lovers.</p>
+                    <p>Price: £25</p>
+                    <div class="quantity-selector">
+                        <button class="decrease">-</button>
+                        <span class="quantity-display" id="werewolf-quantity">1</span>
+                        <button class="increase">+</button>
+                    </div>
+                    <button class="pre-order-button" data-figure="Werewolf Shirt" data-price="25">Pre-order</button>
+                    <div class="size-chart">
+                        <div class="size-box">S</div>
+                        <div class="size-box">M</div>
+                        <div class="size-box">L</div>
+                    </div>
+                </div>
+            </div>
+
+                   <!-- The Demonic Vampire -->
+        <div class="grid-item">
+            <div class="media">
+                <img src="Images/TheDemonicVampire.jpg" alt="The Demonic Vampire">
+            </div>
+            <div class="shirt-info">
+                <h3>The Demonic Vampire</h3>
+                <p class="description">Embrace the night with our Demonic Vampire shirt, designed for the true dark soul.</p>
+                <p>Price: £16.99</p>
+                <div class="quantity-selector">
+                    <button class="decrease">-</button>
+                    <span class="quantity-display" id="vampire-quantity">1</span>
+                    <button class="increase">+</button>
+                </div>
+                <button class="pre-order-button" data-figure="The Demonic Vampire" data-price="16.99">Pre-order</button>
+                <div class="size-chart">
+                    <div class="size-box">S</div>
+                    <div class="size-box">M</div>
+                    <div class="size-box">L</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Yokai Creatura Design -->
+        <div class="grid-item yokai">
+            <div class="yokai-media">
+                <img src="Images/Yokai Creatura.jpg" alt="Yokai Creatura">
+                <video src="videos/Yokai Creature.mp4" autoplay muted loop></video>
+            </div>
+            <div class="shirt-info">
+                <h3>Yokai Creatura</h3>
+                <p class="description">Explore the mysterious with Yokai Creatura, a design inspired by Japanese folklore.</p>
+                <p>Price: £35</p>
+                <div class="quantity-selector">
+                    <button class="decrease">-</button>
+                    <span class="quantity-display" id="yokai-quantity">1</span>
+                    <button class="increase">+</button>
+                </div>
+                <button class="pre-order-button" data-figure="Yokai Creatura" data-price="35">Pre-order</button>
+                <div class="size-chart">
+                    <div class="size-box">S</div>
+                    <div class="size-box">M</div>
+                    <div class="size-box">L</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Basket Section -->
+    <div class="basket-container basket-section" id="basket-container">
+        <h2>Basket</h2>
+        <div id="basket-items"></div>
+        <p>Total: £<span id="total-price">0</span></p>
+
+        <!-- Clear Basket Button -->
+        <button class="clear-basket-button" id="clear-basket">Clear Basket</button>
+
+        <!-- Checkout Button -->
+        <button class="pre-order-button" onclick="window.location.href='pre-order checkout.html'">Checkout</button>
+    </div>
+</div>
+
+<!-- JavaScript for Basket Functionality -->
+<script>
+    let basket = [];
+    let totalPrice = 0;
+
+    function updateBasket() {
+        const basketContainer = document.getElementById("basket-items");
+        basketContainer.innerHTML = ''; 
+        basket.forEach(item => {
+            basketContainer.innerHTML += `<div class="basket-item">${item.figure}: ${item.quantity} x £${item.price} = £${(item.quantity * item.price).toFixed(2)}</div>`;
+        });
+        document.getElementById("total-price").textContent = totalPrice.toFixed(2);
+    }
+
+    const preOrderButtons = document.querySelectorAll(".pre-order-button");
+    preOrderButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            const figure = this.getAttribute("data-figure");
+            const price = parseFloat(this.getAttribute("data-price"));
+            const quantityDisplay = this.parentElement.querySelector('.quantity-display').textContent;
+            const quantity = parseInt(quantityDisplay);
+            const existingItem = basket.find(item => item.figure === figure);
+            if (existingItem) {
+                existingItem.quantity = quantity;
+            } else {
+                basket.push({ figure, price, quantity });
+            }
+            totalPrice = basket.reduce((total, item) => total + (item.price * item.quantity), 0);
+            updateBasket();
+        });
+    });
+
+    document.querySelectorAll('.increase').forEach(button => {
+        button.addEventListener('click', function () {
+            const quantityDisplay = this.previousElementSibling;
+            let quantity = parseInt(quantityDisplay.textContent);
+            if (quantity < 5) {
+                quantity += 1;
+                quantityDisplay.textContent = quantity;
+            }
+        });
+    });
+
+    document.querySelectorAll('.decrease').forEach(button => {
+        button.addEventListener('click', function () {
+            const quantityDisplay = this.nextElementSibling;
+            let quantity = parseInt(quantityDisplay.textContent);
+            if (quantity > 1) {
+                quantity -= 1;
+                quantityDisplay.textContent = quantity;
+            }
+        });
+    });
+
+    const clearBasketButton = document.getElementById("clear-basket");
+    clearBasketButton.addEventListener("click", function () {
+        basket = [];
+        totalPrice = 0;
+        updateBasket();
+    });
+</script>
+
+</body>
+</html>
